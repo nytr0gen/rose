@@ -1,0 +1,17 @@
+{{# post_list }}
+<div class="supertag">{{{ post_date_supertag }}}</div>
+<li class="post-list-item group">
+	<div class="post-list-meta {{# bookmark_status }}bookmark-set{{/ bookmark_status }}" data-id="{{ ID }}">
+		<i class="fa fa-bookmark"></i>
+		<span class="reading-time">{{ reading_time }} min read</span>
+		<span class="bookmark">
+			<span class="bookmark0">Bookmark</span>
+			<span class="bookmark1">Bookmarked</span>
+		</span>
+	</div>
+	<h2 class="post-list-title"><a href="{{ siteUrl }}post/{{ ID }}">{{ post_title }}</a></h2>
+	<p class="post-list-subtitle">{{ post_subtitle }}</p>
+	<p class="post-list-body">Posted by 
+		<a class="post-list-author" href="{{ siteUrl }}{{ username }}">{{ name }}</a></p>
+</li>
+{{/ post_list }}

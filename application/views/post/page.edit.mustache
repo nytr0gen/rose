@@ -1,0 +1,195 @@
+<div class="metabar">
+	<div class="metabar-btn-set">
+		<button class="btn btn-delete" type="button">Delete</button>
+		<button class="btn btn-share-draft" type="button">Share Draft</button>
+		<button class="btn btn-publish" type="submit">Publish</button>
+	</div>
+</div>
+{{# post.post_title }}
+<div class="changeJumbotron">
+	<button class="btn btn-upload"><i class="fa fa-cloud-upload"></i></button>
+</div>
+{{/ post.post_title }}
+
+{{# post }}
+<div class="page-post layout-super-column">
+	<div class="supertag js-saveStatus"></div>
+	<header class="post-header">
+		<h1 class="post-title" contenteditable="true" data-placeholder="Title">{{ post_title }}</h1>
+		<h2 class="post-subtitle" contenteditable="true" data-placeholder="Subtitle">{{ post_subtitle }}</h1>
+		<ul></ul>
+	</header>
+	<div id="editor">
+		<div class="toolbar-normal">
+			<div class="types">
+				<button class="type image" data-toggle="image">Upload image</button>
+			</div>
+		</div>
+		<div class="toolbar-tooltip">
+			<div class="types">
+				<button class="type b" data-edit="bold">B</button>
+				<button class="type i" data-edit="italic">I</button>
+				<button class="type h1" data-insert="h1">H1</button>
+				<button class="type h2" data-insert="h2">H2</button>
+				<button class="type link" data-toggle="link">Link</button>
+				<button class="type blockquote" data-insert="blockquote">Blockquote</button>
+			</div>
+			<div class="arrow"></div>
+		</div>
+		<article class="post-content" contenteditable="true" data-placeholder="Type your story">{{ post_content }}</article>
+	</div>
+</div>
+<div class="layout-single-column group">
+	<div class="word-count"><span>{{ word_count }}</span></div>
+</div>	
+{{/ post }}
+
+<script>
+var modifiedCount = 0;
+var saveOn        = 40;
+var saveOnMax     = 400;
+var _postId       = "{{ post.ID }}";
+
+function _savePost(Func) {
+	Func = typeof Func !== 'undefined' ? Func : '(function(){})';
+
+	var title    = $('.post-title').html(),
+		subtitle = $('.post-subtitle').html(),
+		content  = $('.post-content').html();
+
+	if (   title    == $('.post-title')   .data('placeholder')
+		|| subtitle == $('.post-subtitle').data('placeholder')
+		|| content  == $('.post-content') .data('placeholder')
+	) { return; }
+
+	$.ajax({
+		url: _url + 'action/savePost',
+		data: {'id':       _postId,
+			   'title':    title,
+			   'subtitle': subtitle,
+			   'content':  content}
+	}).done(function(data){
+		_postId = data['id'];
+		Func();
+	});
+}
+
+function savePostAuto() {
+	if (modifiedCount < saveOn) { return; }
+	
+	saveStatus('Saving...');
+	modifiedCount = 0;
+	if (saveOn < saveOnMax) saveOn += 30;
+
+	_savePost(function() {
+		setTimeout("saveStatus('Saved')", 4000);
+	});
+}
+
+function publishPost() {
+	_savePost(function() {
+		$.ajax({
+			url: _url + 'action/publishPost',
+			data: {'id': _postId}
+		}).done(function(data) {
+			location.href = _url + 'post/' + _postId;
+		});
+	});
+}
+
+function shareDraft() {
+	$.ajax({
+		url: _url + 'action/shareDraft',
+		data: {'id': _postId}
+	}).done(function(data) {
+		// location.href = _url + 'drafts';
+	});
+}
+
+function deletePost() {
+	$.ajax({
+		url: _url + 'action/deletePost',
+		data: {'id': _postId}
+	}).done(function(data) {
+		location.href = _url + 'drafts';
+	});
+}
+
+function saveStatus(text) {
+	var $elm = $('.js-saveStatus');
+	if ($elm.css('display') == 'none')
+		$elm.show('slow');
+
+	$elm.text(text);
+}
+
+$(document).ready(function() {
+	$('#editor').wysiwyg({ container: '.post-content' });
+	
+	$('.btn-upload').on('click', function(){
+		modalChangeBackground = $(document).modal({ content: 'New background: <form method="post" action="" enctype="multipart/form-data" id="form-change-background"><div class="error"></div><input type="hidden" name="id" value="' + _postId + '" /><input type="file" name="image" /><button name="submit-change-background">Change background</button></form>' });
+
+		$(document).on('click', 'button[name="submit-change-background"]', function(event){
+			event.preventDefault();
+			
+			var formData = new FormData($('form#form-change-background')[0]);
+			$.ajax({
+				url: _url + 'action/changeBackground',
+				type: 'POST',
+				success: function(html){
+					if(html['status'] == 1){
+						$('.jumbotron').css({ 'background-image': 'url(' + html['new-background'] + ')' });
+						modalChangeBackground.close();						
+					}
+				},
+				error: function(){
+					// ...
+				},
+				data: formData,
+				contentType: false,
+				processData: false
+			});
+		});
+	});
+	
+	$('.post-title, .post-subtitle, .post-content')
+		.on('keyup', function(){
+			modifiedCount++;
+			savePostAuto();
+		});
+
+	$('.btn-publish').click(function(e) {
+		e.preventDefault();
+
+		publishPost();
+	});
+
+	$('.btn-delete').click(function(e) {
+		e.preventDefault();
+
+		deletePost();
+	})
+
+	$('.btn-share-draft').click(function(e) {
+		e.preventDefault();
+
+		shareDraft();
+	})
+
+	$(window).bind('keydown', function(event){
+		if((event.ctrlKey || event.metaKey) && String.fromCharCode(event.which).toLowerCase() == 's') {
+			_savePost();
+			
+			event.preventDefault();
+		}
+	});
+
+
+	var postContent = document.getElementsByClassName('post-content')[0];
+	Countable.live(postContent, function (counter) {
+		if (!$(postContent).hasClass('js-placeholder')) {
+			$('.word-count > span').text(counter.words);
+		}
+	}, {stripTags: true});
+});
+</script>

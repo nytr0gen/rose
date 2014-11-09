@@ -1,0 +1,50 @@
+<div class="layout-single-column">
+	<div class="form">
+		<form method="post" action="">
+			<fieldset>
+				<legend>Edit account</legend>
+				<ul class="form">	
+					{{^ form-settings.status }}
+						{{# form-settings.message }}<li>{{ . }}</li>{{/ form-settings.message }}
+					{{/ form-settings.status }}
+					{{# form-settings.status }}
+						{{# form-settings.final-message.email }}<li>{{ . }}</li>{{/ form-settings.final-message.email }}
+					{{/ form-settings.status }}
+					<li{{# form-settings.fields.email }} class="form-error"{{/ form-settings.fields.email }}>
+						<label for="email">
+							Email
+						</label>
+						<input id="email" name="email" type="email" value="{{ user.email }}">
+					</li>
+					<li{{# form-settings.fields.current_password }} class="form-error"{{/ form-settings.fields.current_password }}>
+						<label for="current_password">
+							Current Password
+							<span class="form-required">*</span>
+						</label>
+						<input id="current_password" type="password" name="current_password">
+						<p class="form-note">Required at any changes you make.</p>
+					</li>
+					<hr>
+					{{# form-settings.status }}
+						{{# form-settings.final-message.password }}<li>{{ . }}</li>{{/ form-settings.final-message.password }}
+					{{/ form-settings.status }}
+					<li{{# form-settings.fields.new_password }} class="form-error"{{/ form-settings.fields.new_password }}>
+						<label for="new_password">
+							New Password
+						</label>
+						<input id="new_password" type="password" name="new_password">
+					<li{{# form-settings.fields.new_password_confirm }} class="form-error"{{/ form-settings.fields.new_password_confirm }}>
+						<label for="new_password_confirm">
+							New Password Confirmation
+						</label>
+						<input id="new_password_confirm" type="password" name="new_password_confirm">
+						<p class="form-note">Leave them empty if you don't want to change.</p>
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<input type="submit" name="submit-settings" value="Edit">
+			</fieldset>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+{{# commentsList }}
+<li class="comments__item">
+	<div class="comments__avatar avatar avatar--64">
+		<img src="{{ siteUrl }}uploads/{{ avatar }}">
+	</div>
+	<div class="comments__date">{{ comm_date }}</div>
+	<div class="comments__author"><a href="{{ siteUrl }}{{ username }}">{{ name }}</a></div>
+	<div class="comments__text">{{ comm_text }}</div>
+</li>
+{{/ commentsList }}

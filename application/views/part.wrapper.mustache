@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rose</title>
+    <meta charset="UTF-8">
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="{{ siteUrl }}template/styles/style.css" />
+	<script src="{{ siteUrl }}template/javascripts/jquery-1.11.0.min.js"></script>
+	<script>_url = "{{ siteUrl }}";</script>
+</head>
+<body>
+
+<div class="jumbotron"{{# post.post_background }} style="background-image: url('{{ siteUrl }}uploads/{{ . }}');"{{/ post.post_background }}></div>
+<a href="{{ siteUrl }}" class="logo">Rose</a>
+<div class="wrap">
+	<nav class="siteNav">
+		<ul class="siteNav__list siteNav__list--inline">
+			<li><a href="{{ siteUrl }}"><i class="fa fa-home fa-fw"></i> Home</a></li>
+			{{# loggedIn }}
+			<li><a href="{{ siteUrl }}drafts/">Drafts</a></li>
+			<li><a href="{{ siteUrl }}{{ user.username }}">{{ user.name }}</a></li>
+			{{/ loggedIn }}
+			<li><a href="{{ siteUrl }}post/new">New post</a></li>
+		</ul>
+		<div class="siteNav__user">
+			<ul class="siteNav__list--inline">
+				{{# loggedIn }}
+				<li><a href="{{ siteUrl }}user/settings">Profile</a></li>
+				<li><a href="{{ siteUrl }}user/logout">Log out</a></li>
+				{{/ loggedIn }}
+				{{^ loggedIn }}
+				<li><a href="{{ siteUrl }}user/join">Join</a></li>
+				<li class="siteNav__separator">/</li>
+				<li><a href="{{ siteUrl }}user/login">Log in</a></li>
+				{{/ loggedIn }}
+			</ul>
+			<!--
+			<div class="siteNav__userAvatar avatar avatar--96">
+				<img src="{{ siteUrl }}template/images/avatar.jpg">
+			</div>
+			//-->
+		</div>
+	</nav>
+	{{# msg }}
+	<div class="msg">{{ . }}<div class="msg-close">x</div></div>
+	{{/ msg }}
+	<div class="page page-{{ pageType }}">
+		{{{ pageContent }}}
+		<footer class="footer">
+			<div class="copyright">Rose &copy; 2014 Dobrescu &amp; Vulpe</div>
+		</footer>
+	</div>
+
+	<script src="{{ siteUrl }}template/javascripts/jquery.modal.js"></script>
+	<script src="{{ siteUrl }}template/javascripts/jquery.wysiwyg.js"></script>
+	<script src="{{ siteUrl }}template/javascripts/mustache.js"></script>
+	<script src="{{ siteUrl }}template/javascripts/countable.js"></script>
+	<script src="{{ siteUrl }}template/javascripts/script.js"></script>
+</div>
+
+</body>
+</html>

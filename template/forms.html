@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rose</title>
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="">
+	<div class="jumbotron"></div>
+	<div class="logo">Rose</div>
+    <div class="wrap">
+    	<nav class="site-nav group">
+			<ul class="site-nav-list group">
+				<li><a href="index.html"><i class="fa fa-home fa-fw"></i> Home</a></li>
+				<li><a href="article.html">Article</a></li>
+				<li><a href="forms.html">Forms</a></li>
+				<li><a href=""><i class="fa fa-search fa-fw"></i></a></li>
+				<li><a href=""><i class="fa fa-cog fa-fw"></i></a></li>
+			</ul>
+			<ul class="site-nav-list site-nav-list-second group">
+				<li><a href="">Join</a></li>
+				<li class="site-nav-separator">/</li>
+				<li><a href="">Sign in</a></li>
+			</ul>
+		</nav>
+		<div class="page page-form">
+				<div class="layout-single-column">
+					<form method="post" action="#fpo">
+						<fieldset>
+							<legend>Disabled:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_input_disabled">Input</label>
+									<input id="field_input_disabled" name="field_input_disabled" disabled="disabled" class="disabled">
+								</li>
+								<li>
+									<label for="field_select_disabled">Select</label>
+									<select name="field_select_disabled" id="field_select_disabled" disabled="disabled" class="disabled">
+										<option value="">Lorem ipsum</option>
+										<option value="1">Dolor sit amet</option>
+										<option value="1">Lorem ipsum</option>
+									</select>
+								</li>
+								<li>
+									<label for="field_textarea_disabled">Textarea</label>
+									<textarea id="field_textarea_disabled" name="field_textarea_disabled" cols="35" rows="5" disabled="disabled" class="disabled"></textarea>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Hint:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_input_default">Default</label>
+									<input id="field_input_default" name="field_input_default" value="Lorem ipsum dolor sit amet">
+								</li>
+								<li>
+									<label for="field_input_hint">Hint</label>
+									<input id="field_input_hint" name="field_input_hint" class="hint" value="Lorem ipsum dolor sit amet">
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Password:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_input_password">Input</label>
+									<input type="password" id="field_input_password" name="field_input_password" class="password">
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Search:</legend>
+							<input id="field_input_search" name="field_input_search" class="search_input">
+							<span class="button button_search">
+								<button type="submit">Search</button>
+							</span>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Form Example:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_username">
+										Username
+										<span class="form-required">*</span>
+									</label>
+									<input id="field_username" name="field_username">
+								</li>
+								<li>
+									<label for="field_password">
+										Password
+										<span class="form-required">*</span>
+									</label>
+									<input type="password" id="field_password" name="field_password" class="password">
+								</li>
+								<li class="inline push">
+									<input type="checkbox" id="field_myself" name="field_myself" value="true" class="checkbox">
+									<label for="field_myself">I plan to print this eGift myself and would like it sent to my email address.</label>
+								</li>
+								<li class="inline push">
+									<input type="checkbox" id="field_me" name="field_me" value="true" class="checkbox">
+									<label for="field_me">This card belongs to me.</label>
+									<p class="form-note">Registering your card lets you protect its balance and take advantage of other deals and rewards. </p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<ol class="form">
+								<li class="date">
+									<label for="field_birthmonth">
+										Birthday
+										<span class="form-required">*</span>
+									</label>
+									<select name="field_birthmonth" id="field_birthmonth" class="field_large numbers">
+										<option value="">Month</option>
+										<option value="1">January</option>
+										<option value="2">February</option>
+										<option value="3">March</option>
+									</select>
+
+									<label class="hidden_visually" for="field_birthday">
+										Day of Birth
+										<span class="form-required">*</span>
+									</label>
+									<select name="field_birthday" id="field_birthday" class="field_medium numbers">
+										<option value="">Day</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+
+									<label class="hidden_visually" for="field_birthyear">Year of Birth</label>
+									<select name="field_birthyear" id="field_birthyear" class="field_medium numbers">
+										<option value="-1">Year</option>
+										<option value="2011">2011</option>
+										<option value="2010">2010</option>
+										<option value="2009">2009</option>
+									</select>
+									<p class="form-note year">optional</p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<ol class="form">
+								<li>
+									<label for="field_amount1">Other Amount</label>
+									<span class="numbers">$</span>
+									<input id="field_amount1" maxlength="3" class="field_xxsmall numbers align_right">
+									<span class="numbers">.00</span>
+								</li>
+								<li class="form-error">
+									<label for="field_amount2">Other Amount</label>
+									<span class="numbers">$</span>
+									<input id="field_amount2" maxlength="3" class="field_xxsmall numbers align_right">
+									<span class="numbers">.00</span>
+									<p class="form-message">Please enter an amount between $10.00 and $100.00.</p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Edit your email address:</legend>
+							<ol class="form">
+								<li>
+								</li><li>
+									<label>Current Email</label>
+									<b>test@starbucks.com</b>
+								</li>
+								<li>
+									<label for="field_email">
+										New Email
+										<span class="form-required">*</span>
+									</label>
+									<input id="field_email" name="field_email" maxlength="100">
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<ol class="form">
+								<li>
+								</li><li>
+									<label for="field_phone">
+										Phone
+										<span class="form-required">*</span>
+									</label>
+									<input id="field_phone" name="field_phone" maxlength="15" class="numbers">
+									<p class="form-note">(xxx-xxx-xxxx)</p>
+								</li>
+								<li>
+									<label for="field_country_code">
+										Phone (International)
+										<span class="form-required">*</span>
+									</label>
+									<input id="field_country_code" name="field_country_code" maxlength="3" class="field_xxsmall numbers"> -
+									<input id="field_city_code" name="field_city_code" maxlength="4" class="field_xsmall numbers"> -
+									<input id="field_phone_int" name="field_phone_int" maxlength="8" class="field_medium numbers">
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<ol class="form">
+								<li>
+									<label for="field_address1">
+										Street Address
+										<span class="form-required">*</span>
+										<a href="#privacy">†</a>
+									</label>
+									<input id="field_address1" name="field_address1" maxlength="100">
+								</li>
+								<li>
+									<label for="field_address2">Apt/Suite No.</label>
+									<input id="field_address2" name="field_address2" maxlength="100">
+								</li>
+								<li>
+									<label for="field_city">City</label>
+									<input id="field_city" name="field_city" maxlength="100">
+								</li>
+								<li>
+									<label for="field_state">State/Province</label>
+									<select id="field_state" name="field_state">
+										<option value="">- choose one -</option>
+										<option value="AL">Alabama</option>
+										<option value="AK">Alaska</option>
+										<option value="AS">American Samoa</option>
+									</select>
+								</li>
+								<li class="form-error">
+									<label for="field_state2">State/Province</label>
+									<select id="field_state2" name="field_state2">
+										<option value="">- choose one -</option>
+										<option value="AL">Alabama</option>
+										<option value="AK">Alaska</option>
+										<option value="AS">American Samoa</option>
+									</select>
+								</li>
+								<li>
+									<label for="field_zip">ZIP/Postal Code</label>
+									<input id="field_zip" name="field_zip" maxlength="7" class="numbers field_small">
+									<p class="form-note">Choose one that is 7 characters</p>
+								</li>
+								<li class="form-error">
+									<label for="field_zip2">ZIP/Postal Code</label>
+									<input id="field_zip2" name="field_zip2" maxlength="7" class="numbers field_small">
+									<p class="form-message">Please enter your zip/postal code</p>
+									<p class="form-note">Choose one that is 7 characters</p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Specifics about your visit:</legend>
+							<ol class="form">
+								<li class="form-error">
+									<label for="field_store">store location or name</label>
+									<input id="field_store" name="field_store">
+									<p class="form-message">Please enter a location</p>
+									<p class="form-note"><a href="#fpo">Pick a store</a></p>
+									<p class="form-note">(if applicable)</p>
+								</li>
+
+								<li>
+									<label for="field_store">Date picker</label>
+									<input id="field_delivery_date" name="field_delivery_date" class="numbers field_medium" value="5/11/2011">
+									<img class="ui-datepicker-trigger" src="/static/images/card/calendar.gif" alt="Select a delivery date" title="Select a delivery date">
+									<p class="form-note">
+										Delivery on a future date requires payment with a credit, debit or Starbucks Card.
+									</p>
+								</li>
+								<li>
+									<span class="label">Checkboxes</span>
+									<ul>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_checkbox_1" name="field_checkbox_1">
+											<label for="field_checkbox_1">Lorem ipsum dolor sit amet</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_checkbox_2" name="field_checkbox_2">
+											<label for="field_checkbox_2">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit amet</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_checkbox_3" name="field_checkbox_3">
+											<label for="field_checkbox_3">Ut enim ad minim veniam</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_checkbox_4" name="field_checkbox_4">
+											<label for="field_checkbox_4">Nostrud exercitation ullamco laboris</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_checkbox_5" name="field_checkbox_5">
+											<label for="field_checkbox_5">Nisi ut aliquip</label>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<span class="label">Radio Buttons</span>
+									<ul>
+										<li class="inline push">
+											<input type="radio" class="radio" id="field_radio_1" name="field_radio">
+											<label for="field_radio_1">Lorem ipsum dolor sit amet</label>
+										</li>
+										<li class="inline push">
+											<input type="radio" class="radio" id="field_radio_2" name="field_radio">
+											<label for="field_radio_2">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit amet</label>
+										</li>
+										<li class="inline push">
+											<input type="radio" class="radio" id="field_radio_3" name="field_radio">
+											<label for="field_radio_3">Ut enim ad minim veniam</label>
+										</li>
+										<li class="inline push">
+											<input type="radio" class="radio" id="field_radio_4" name="field_radio">
+											<label for="field_radio_4">Nostrud exercitation ullamco laboris</label>
+										</li>
+										<li class="inline push">
+											<input type="radio" class="radio" id="field_radio_5" name="field_radio">
+											<label for="field_radio_5">Nisi ut aliquip</label>
+										</li>
+									</ul>
+								</li>
+							</ol>
+
+							<ol class="form form_full">
+								<li>
+									<span class="label">Checkboxes or Radio Buttons in Columns</span>
+									<ul class="columns">
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_columns_1" name="field_columns_1">
+											<label for="field_columns_1">New beverages and food</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_columns_2" name="field_columns_2">
+											<label for="field_columns_2">Events at your local Starbucks</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_columns_3" name="field_columns_3">
+											<label for="field_columns_3">Global responsibility</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_columns_4" name="field_columns_4">
+											<label for="field_columns_4">Health and wellness options</label>
+										</li>
+										<li class="inline push">
+											<input type="checkbox" class="checkbox" id="field_columns_5" name="field_columns_5">
+											<label for="field_columns_5">Special offers and rewards</label>
+										</li>
+									</ul>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Validation - Unique Check:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_username_check_invalid">
+										Username
+										<span class="form-required">*</span>
+									</label>
+									<input name="field_username_check_invalid" id="field_username_check_invalid">
+									<p class="form-note">Choose one that's at least 6 alphanumeric characters long, with no spaces.</p>
+									<p class="validation_check invalid">Username is unavailable</p>
+								</li>
+								<li>
+									<label for="field_username_check_valid">
+										Username
+										<span class="form-required">*</span>
+									</label>
+									<input name="field_username_check_valid" id="field_username_check_valid">
+									<p class="form-note">Choose one that's at least 6 alphanumeric characters long, with no spaces.</p>
+									<p class="validation_check valid">Username is available</p>
+								</li>
+								<li>
+									<label for="field_username_check_loading">
+										Username
+										<span class="form-required">*</span>
+									</label>
+									<input name="field_username_check_loading" id="field_username_check_loading">
+									<p class="form-note">Choose one that's at least 6 alphanumeric characters long, with no spaces.</p>
+									<p class="validation_check loading">Checking username…</p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<hr>
+
+						<fieldset>
+							<legend>Textarea:</legend>
+							<ol class="form">
+								<li>
+									<label for="field_message">
+										Message
+										<span class="form-required">*</span>
+									</label>
+									<textarea id="field_message" name="field_message" cols="35" rows="5"></textarea>
+									<p class="form-note">(2600 characters maximum)</p>
+								</li>
+								<li class="form-error">
+									<label for="field_message2">
+										Message
+										<span class="form-required">*</span>
+									</label>
+									<textarea id="field_message2" name="field_message2" cols="35" rows="5"></textarea>
+									<p class="form-message">This field is required</p>
+									<p class="form-note">(2600 characters maximum)</p>
+								</li>
+							</ol>
+						</fieldset>
+
+						<fieldset class="submit">
+							<p>
+								<a class="button-cancel" href="#fpo">Cancel</a>
+
+								<input type="submit" value="Submit">
+							</p>
+						</fieldset>
+					</form>
+				</div>	
+				<footer class="footer">
+					<div class="copyright">Rose &copy; 2014 Dobrescu & Vulpe</div>
+				</footer>
+		</div>	
+    </div>
+</body>
+</html>

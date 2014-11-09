@@ -1,0 +1,16 @@
+<div class="nav-tabs group">
+	<ul class="nav-tabs-list">
+		<li><a href="{{ siteUrl }}" class="active">Reading list</a></li>
+		<li><a href="{{ siteUrl }}user/bookmarks">Bookmarks</a></li>
+		<li><a href="">Top 100</a></li>
+	</ul>			
+</div>
+<div class="layout-super-column">
+	<ul class="post-list"></ul>
+</div>
+
+<script>
+$(document).ready(function() {
+	getPosts('readingList');
+});
+</script>

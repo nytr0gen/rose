@@ -1,0 +1,36 @@
+{{# isProfileAuthor }}
+<div class="metabar">
+	<div class="metabar-btn-set">
+		<button class="btn btn-edit" type="button">Edit</button>
+	</div>
+</div>
+{{/ isProfileAuthor }}
+
+{{# profile }}
+<div class="profile-board">
+	<div class="profile-board-avatar avatar avatar--150">
+		<img src="{{ siteUrl }}uploads/{{ avatar }}">
+	</div>
+	<div class="profile-board-body">
+		<div class="profile-board-name">{{ name }}</div>
+		<div class="profile-board-bio">{{ bio }}</div>
+	</div>
+</div>
+{{/ profile }}
+<div class="layout-super-column">
+	<ul class="post-list"></ul>
+</div>
+
+<script>
+_username = '{{ profile.username }}';
+
+$(document).ready(function() {
+	getPosts('profilePosts');
+
+	$('.btn-edit').click(function(e) {
+		e.preventDefault();
+
+		location.href = _url + _username + '/edit';
+	})
+});
+</script>

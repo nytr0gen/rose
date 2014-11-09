@@ -1,0 +1,23 @@
+<div class="layout-single-column">
+	<div class="form">
+		<form method="post" action="">
+			<fieldset>
+				<legend>Log In</legend>
+				<ul class="form">
+					{{^ form-login.status }}{{# form-login.message }}<li>{{ . }}</li>{{/ form-login.message }}{{/ form-login.status }}
+					<li{{# form-login.fields.username }} class="form-error"{{/ form-login.fields.username }}>
+						<label for="username">Username</label>
+						<input id="username" name="username" type="text" required autofocus>
+					</li>
+					<li{{# form-login.fields.password }} class="form-error"{{/ form-login.fields.password }}>
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" required>
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<input type="submit" name="submit-login" value="Log In">
+			</fieldset>
+		</form>
+	</div>
+</div>

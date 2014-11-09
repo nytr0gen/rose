@@ -1,0 +1,71 @@
+<div class="metabar">
+	<div class="metabar-btn-set">
+		<button class="btn btn-save" type="button">Save</button>
+	</div>
+</div>
+
+{{# profile }}
+<div class="profile-board">
+	<div class="profile-board-avatar avatar avatar--150 profile-board-avatar-change">
+		<img src="{{ siteUrl }}uploads/{{ avatar }}">
+		<i class="fa fa-cloud-upload"></i>
+	</div>
+	<div class="profile-board-body">
+		<div class="profile-board-name" contenteditable="true" data-placeholder="Type a name for your profile">{{ name }}</div>
+		<div class="profile-board-bio" contenteditable="true" data-placeholder="Type a short description about yourself">{{ bio }}</div>
+	</div>
+</div>
+{{/ profile }}
+
+
+<script>
+_username = '{{ profile.username }}';
+
+function saveProfile() {
+	$.ajax({
+		url: _url + 'action/saveProfile',
+		data: {'name': $('.profile-board-name').text(),
+			   'bio':  $('.profile-board-bio').text()}
+	}).done(function(data) {
+		location.href = _url + _username;
+	});
+}
+
+$('document').ready(function() {
+	$('.profile-board-avatar').on('click', function(){
+		modalChangeAvatar = $(document).modal({ content: 'New avatar: <form method="post" action="" enctype="multipart/form-data" id="form-change-avatar"><div class="error"></div><input type="file" name="image" /><button name="submit-change-avatar">Change avatar</button></form>' });
+
+		$(document).on('click', 'button[name="submit-change-avatar"]', function(event){
+			event.preventDefault();
+			
+			var formData = new FormData($('form#form-change-avatar')[0]);
+			$.ajax({
+				url: _url + 'action/changeAvatar',
+				type: 'POST',
+				success: function(html){
+					console.log(html);
+					if(html['status'] == 1){
+						$('.profile-board-avatar img').attr('src', html['new-avatar']);
+						modalChangeAvatar.close();						
+					} else {
+						$('#form-change-avatar .error').html(html['message']);
+					}
+				},
+				error: function(){
+					// ...
+				},
+				data: formData,
+				contentType: false,
+				processData: false
+			});
+		});
+	});
+	
+	
+	$('.btn-save').click(function(e) {
+		e.preventDefault();
+
+		saveProfile();
+	})
+});
+</script>

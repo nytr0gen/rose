@@ -1,0 +1,174 @@
+{{# isPostAuthor }}
+<div class="metabar">
+	<div class="metabar-btn-set">
+		<button class="btn btn-edit" type="button">Edit</button>
+	</div>
+</div>
+{{/ isPostAuthor }}
+{{# post }}
+<div class="page-post layout-super-column">
+	<div class="supertag">{{ post_date_supertag }}</div>
+	<header class="post-header">
+		<h1 class="post-title">{{ post_title }}</h1>
+		<h2 class="post-subtitle">{{ post_subtitle }}</h1>
+		<div class="post-meta">Written by <a href="{{ siteUrl }}{{ username }}">{{ name }}</a></div>
+	</header>
+	<article class="post-content">{{ post_content }}</article>
+</div>
+{{/ post }}
+<div class="layout-multi-column">
+	{{# profile }}
+	<div class="layout-half-column">
+		<div class="Box profileBox">
+			<div class="profileBox__avatar avatar avatar--96">
+				<img src="{{ siteUrl }}uploads/{{ avatar }}">
+			</div>
+			<div class="profileBox__body">
+				<div class="profileBox__name"><a href="{{ siteUrl }}{{ username }}">{{ name }}</a></div>
+				<div class="profileBox__bio">{{ bio }}</div>
+			</div>
+		</div>
+	</div>
+	{{/ profile }}
+	<div class="layout-half-column">
+		<div class="Box recommendBox">
+			<button class="btn btn-recommend"><i class="fa fa-thumbs-up"></i> Recommend</button>
+			<div class="recommendBox__status">
+				{{# user-recommend.status }}
+					You are recommending this.
+				{{/ user-recommend.status }}
+				{{^ user-recommend.status }}
+					You are not recommending this.
+				{{/ user-recommend.status }}
+			</div>
+			<ul class="recommendBox__list">{{ users-recommending }}</ul>
+		</div>
+	</div>
+</div>
+<div class="layout-single-column">
+	<div class="comments">
+		<header class="comments__title"><h2>Comments</h2></header>
+		<div class="commentForm group">
+			{{# loggedIn }}
+			<textarea class="commentForm__text" placeholder="Type your comment here"></textarea>
+			<div class="pull-right">
+				<button type="submit" class="btn btn-submit" value="submit">Submit</button>
+			</div>
+			{{/ loggedIn }}
+			{{^ loggedIn }}
+			You can post comments only if you are logged in. Head over to <a href="{{ siteUrl }}user/login">login</a> or to <a href="{{ siteUrl }}user/signup">sign up</a>.
+			{{/ loggedIn }}
+		</div>
+		<ul class="comments__list"></ul>
+		<div class="comments__loadMore"><a href="javascript:;">Load more</a></div>
+	</div>
+</div>
+<script>
+_postId  = '{{ post.ID }}';
+offset   = 0;
+loading  = 0;
+template = null;
+commentsPerPage = {{ commentsPerPage }};
+
+function getComments() {
+	if (loading) {
+		return;
+	}
+
+	loading = 1;
+	$('.comments__loadMore').hide();
+	$.ajax({
+		url: _url + 'action/getComments',
+		data: {postId: _postId,
+			   offset: offset}
+	}).done(function(view) {
+		if (view['status']) {
+			$('.comments__list').appendTpl(template, view);
+			loading = 0;
+			offset++;
+			if (view['commentsList'].length == commentsPerPage) {
+				$('.comments__loadMore').show();
+			}
+		}
+	})
+}
+
+function addComment() {
+	var commText = $('.commentForm__text').val();
+	$('.commentForm__text').val('');
+
+	$.ajax({
+		url: _url + 'action/addComment',
+		data: {postId: _postId,
+			   commText: commText}
+	}).done(function(data) {
+		if (data['status']) {
+			$('.comments__list').empty();
+			offset = 0;
+			getComments();
+		}
+	})
+}
+
+$('document').ready(function() {
+	template = getTpl('commentsList');
+	Mustache.parse(template);
+	getComments();
+
+	$('.comments__loadMore a').click(function(e) {
+		e.preventDefault();
+
+		getComments();
+	});
+
+	$('.commentForm__text')
+		.keypress(function(e) {
+	    	if(e.which == 13) {
+	    		e.preventDefault();
+
+	    		addComment();
+	    	}
+	    })
+	    .focus(function() {
+	    	$(this).addClass('js-focus');
+	    })
+	    .blur(function() {
+	    	if ($(this).val() == '') {
+	    		$(this).removeClass('js-focus');
+	    	}
+	    });
+
+	$('.btn-submit').click(function(e) {
+		e.preventDefault();
+
+		addComment();
+	});
+
+	$('.btn-edit').click(function(e) {
+		e.preventDefault();
+
+		location.href = _url + 'post/' + _postId + '/edit';
+	});
+	
+	$('.btn-recommend').on('click', function(event){
+		event.preventDefault();
+		
+		$.ajax({
+			url: _url + 'action/recommend',
+			data: { id: _postId }
+		}).done(function(data) {
+			if (data['recommended'] == 1) {
+				$('.recommendBox__status').html('You are recommending this.');
+			} else {
+				$('.recommendBox__status').html('You are not recommending this.');
+			}
+			
+			$('.recommendBox__list').html('');
+			k = data['users-recommending'].length;
+			for(i = 0; i < k; i++){
+				$('.recommendBox__list').append(data['users-recommending'][i]['name'] + ((i < k - 1) ? ', ' : ''));
+			}
+		});
+	});
+});
+</script>
