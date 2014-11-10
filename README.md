@@ -1,4 +1,4 @@
-Project coded by Alexandru Dobrescu and Robert Vulpe
+Project coded by Alexandru Dobrescu and Robert Vulpe. Demo [here](http://www.vulpe.info/Rose/)
 
 Rose is a social platform for dreamers where you can share world changing ideas with people around the globe through stories and little bits. You are able to participate at discussions about different creative themes.
 
